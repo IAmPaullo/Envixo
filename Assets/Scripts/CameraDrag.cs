@@ -18,16 +18,16 @@ public class CameraDrag : MonoBehaviour
     CinemachineFreeLook cameraFreeLook;
 
     [SerializeField]
-    Transform camera;
+    Transform cameraObj;
 
     float zoom = 10f;
-    
+
     float topRigHeight, midRigRadius, botRigRadius;
 
 
     private void Start()
     {
- 
+
     }
 
     private void Update()
@@ -93,13 +93,13 @@ public class CameraDrag : MonoBehaviour
             newPosition.x = Input.GetAxis("Mouse X") * -1;
             newPosition.y = Input.GetAxis("Mouse Y") * -1;
 
-            transform.position += camera.right * newPosition.x * panSpeed * Time.deltaTime;
-            transform.position += camera.up * newPosition.y * panSpeed * Time.deltaTime;
+            transform.position += cameraObj.right * newPosition.x * panSpeed * Time.deltaTime;
+            transform.position += cameraObj.up * newPosition.y * panSpeed * Time.deltaTime;
 
         }
 
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 )
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             //cameraFreeLook.m_Orbits[0].m_Height -= addCameraHeightValue;
             //cameraFreeLook.m_Orbits[1].m_Radius -= zoomValue;
@@ -110,9 +110,6 @@ public class CameraDrag : MonoBehaviour
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            //cameraFreeLook.m_Orbits[0].m_Height += addCameraHeightValue;
-            //cameraFreeLook.m_Orbits[1].m_Radius += zoomValue;
-            //cameraFreeLook.m_Orbits[2].m_Height -= addCameraHeightValue;
 
             zoom += zoomValue;
         }
