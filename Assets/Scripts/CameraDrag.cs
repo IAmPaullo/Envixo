@@ -24,21 +24,17 @@ public class CameraDrag : MonoBehaviour
 
     float topRigHeight, midRigRadius, botRigRadius;
 
-
-    private void Start()
-    {
-
-    }
+    public bool isDrag;
 
     private void Update()
     {
-        //MousePan();
+
         MouseControl();
     }
 
     void MousePan()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(2))
         {
 
             Vector3 newPosition = new Vector3();
@@ -50,12 +46,12 @@ public class CameraDrag : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             startPos = Input.mousePosition;
 
         }
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             Vector3 velocity = Input.mousePosition - startPos;
             velocity = new Vector2(velocity.y, velocity.x);
@@ -75,18 +71,28 @@ public class CameraDrag : MonoBehaviour
 
     public void MouseControl()
     {
-        if (Input.GetMouseButton(0))
+        if (isDrag)
         {
-            cameraFreeLook.m_XAxis.m_MaxSpeed = horizontalSpeed;
-            cameraFreeLook.m_YAxis.m_MaxSpeed = verticalSpeed;
-        }
-        else
-        {
-            cameraFreeLook.m_XAxis.m_MaxSpeed = 0;
-            cameraFreeLook.m_YAxis.m_MaxSpeed = 0;
+            if (Input.GetMouseButton(1))
+            {
+                cameraFreeLook.m_XAxis.m_MaxSpeed = horizontalSpeed;
+                cameraFreeLook.m_YAxis.m_MaxSpeed = verticalSpeed;
+            }
+            else
+            {
+                cameraFreeLook.m_XAxis.m_MaxSpeed = 0;
+                cameraFreeLook.m_YAxis.m_MaxSpeed = 0;
+            }
+
         }
 
-        if (Input.GetMouseButton(1))
+        MouseMoveCameraAxis();
+        MouseZoom();
+    }
+
+    public void MouseMoveCameraAxis()
+    {
+        if (Input.GetMouseButton(2))
         {
 
             Vector3 newPosition = new Vector3();
@@ -97,16 +103,13 @@ public class CameraDrag : MonoBehaviour
             transform.position += cameraObj.up * newPosition.y * panSpeed * Time.deltaTime;
 
         }
+    }
 
-
+    public void MouseZoom()
+    {
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            //cameraFreeLook.m_Orbits[0].m_Height -= addCameraHeightValue;
-            //cameraFreeLook.m_Orbits[1].m_Radius -= zoomValue;
-            //cameraFreeLook.m_Orbits[2].m_Height += addCameraHeightValue;
-
             zoom -= zoomValue;
-
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
@@ -118,12 +121,7 @@ public class CameraDrag : MonoBehaviour
         cameraFreeLook.m_Orbits[0].m_Height = zoom;
         cameraFreeLook.m_Orbits[1].m_Radius = zoom;
         cameraFreeLook.m_Orbits[2].m_Height = -zoom;
-
-
-
-
     }
-
 
 
 

@@ -1,32 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UIHandler : MonoBehaviour
 {
-    [SerializeField]
-    public PrefabTypeSO prefab;
+    public PrefabTypeSO[] activePrefab;
 
     [SerializeField]
     Camera cameraObj;
 
+    //[SerializeField]
+    //Transform objBtnHolder;
+
+    GameObject objectToSpawn;
+    private Vector3 placeableObjPos;
+
+    public bool isSpawn = false;
 
 
-    Vector3 placeableObjPos = new Vector3(10, 0, 0);
 
+    public void SelectedObject(int index)
+    {
+        objectToSpawn = activePrefab[index].primitiveObject;
+    }
 
     private void Update()
     {
         InputButtonHandler();
+
     }
 
     public void InputButtonHandler()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isSpawn && !EventSystem.current.IsPointerOverGameObject())
         {
             ObjectToMousePos();
-            
         }
     }
 
@@ -34,7 +44,6 @@ public class UIHandler : MonoBehaviour
     private Vector3 GetMouseWorldPos()
     {
         Vector3 mouseWorldPosition = cameraObj.WorldToScreenPoint(Input.mousePosition);
-        
 
         return mouseWorldPosition;
     }
@@ -44,13 +53,14 @@ public class UIHandler : MonoBehaviour
         Ray ray = cameraObj.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
 
-        if(Physics.Raycast(ray, out hitInfo))
+        if (Physics.Raycast(ray, out hitInfo))
         {
             placeableObjPos = hitInfo.point;
             Debug.Log(hitInfo.transform.name);
-            Instantiate(prefab.primitiveObject, placeableObjPos, Quaternion.FromToRotation(Vector3.up, hitInfo.normal));
+
+            Instantiate(objectToSpawn, placeableObjPos, Quaternion.FromToRotation(Vector3.up, hitInfo.normal));
         }
-        
+
 
     }
 }
