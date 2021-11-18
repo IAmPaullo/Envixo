@@ -37,19 +37,19 @@ public class CaseManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKey(KeyCode.C))
+        if (Input.GetKey(KeyCode.C) || Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1))
         {
             enumStates = States.CameraDrag;
             FunctionCases();
         }
 
-        if (Input.GetKey(KeyCode.O))
+        if (Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2))
         {
             enumStates = States.SpawnObject;
             FunctionCases();
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Alpha3) || Input.GetKey(KeyCode.Keypad3))
         {
             enumStates = States.SelectObject;
             FunctionCases();
