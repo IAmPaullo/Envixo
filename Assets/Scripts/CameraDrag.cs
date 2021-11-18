@@ -20,6 +20,9 @@ public class CameraDrag : MonoBehaviour
     [SerializeField]
     Transform cameraObj;
 
+    [SerializeField]
+    SelectCustomObject selectedObject;
+
     float zoom = 10f;
 
     float topRigHeight, midRigRadius, botRigRadius;
@@ -34,7 +37,7 @@ public class CameraDrag : MonoBehaviour
 
     void MousePan()
     {
-        if (Input.GetMouseButton(2))
+        if (Input.GetMouseButton(1))
         {
 
             Vector3 newPosition = new Vector3();
@@ -46,12 +49,12 @@ public class CameraDrag : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             startPos = Input.mousePosition;
 
         }
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0))
         {
             Vector3 velocity = Input.mousePosition - startPos;
             velocity = new Vector2(velocity.y, velocity.x);
@@ -73,7 +76,7 @@ public class CameraDrag : MonoBehaviour
     {
         if (isDrag)
         {
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButton(0))
             {
                 cameraFreeLook.m_XAxis.m_MaxSpeed = horizontalSpeed;
                 cameraFreeLook.m_YAxis.m_MaxSpeed = verticalSpeed;
@@ -87,12 +90,13 @@ public class CameraDrag : MonoBehaviour
         }
 
         MouseMoveCameraAxis();
-        MouseZoom();
+        if (selectedObject.selectedObject == null)
+            MouseZoom();
     }
 
     public void MouseMoveCameraAxis()
     {
-        if (Input.GetMouseButton(2))
+        if (Input.GetMouseButton(1))
         {
 
             Vector3 newPosition = new Vector3();

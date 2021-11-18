@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fdd9290bec89a49ad3525816d19d69, type: 3}
   m_Name: Stairs
   m_EditorClassIdentifier: 
-  primitiveObject: {fileID: 100000, guid: 08258afcf0b38f34a93780d9aac149f8, type: 3}
+  primitiveObject: {fileID: 2412627847220506990, guid: 5f73ae536c84a1641bb8890cc2322668, type: 3}
   weight: 1

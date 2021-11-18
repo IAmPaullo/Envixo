@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2412627847222505390}
   - component: {fileID: 2412627847218405326}
   m_Layer: 0
-  m_Name: PTK_Stairs_Small
-  m_TagString: Untagged
+  m_Name: Stairs
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 81bb119d0b6f22f4ab48a979f9b39e48, type: 2}
+  - {fileID: 2100000, guid: 2f3f4117a1b991449a5ad83d159faf1e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
